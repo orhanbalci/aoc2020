@@ -8,30 +8,29 @@ pub fn part_i() -> u32 {
     sorted
         .iter()
         .enumerate()
-        .map(|(index, &val)| {
+        .find_map(|(index, &val)| {
             sorted
                 .iter()
                 .skip(index)
                 .find(|&&d| d + val == 2020)
                 .map(|&d| d * val)
         })
-        .find(|k| k.is_some())
-        .unwrap()
         .unwrap()
 }
 
 pub fn part_ii() -> u32 {
     let mut input = read_input();
-    input.sort();
+    input.sort_unstable();
     input
         .iter()
         .enumerate()
-        .map(|(index, &val)| {
+        .find_map(|(index, &val)| {
             input
                 .iter()
                 .enumerate()
                 .skip(index)
-                .map(|(index2, &val2)| {
+                .filter(|(_index, &val2)| val2 + val < 2020)
+                .find_map(|(index2, &val2)| {
                     input
                         .iter()
                         .enumerate()
@@ -39,13 +38,7 @@ pub fn part_ii() -> u32 {
                         .find(|(_index3, &val3)| val + val2 + val3 == 2020)
                         .map(|(_index3, &val3)| val * val2 * val3)
                 })
-                .collect::<Vec<Option<u32>>>()
-                .into_iter()
-                .find(|k| k.is_some())
         })
-        .find(|k| k.is_some())
-        .unwrap()
-        .unwrap()
         .unwrap()
 }
 
@@ -54,7 +47,6 @@ fn read_input() -> Vec<u32> {
     let line_reader = BufReader::new(file);
     line_reader
         .lines()
-        .into_iter()
-        .map(|f| f.map(|x| x.parse::<u32>().unwrap()).unwrap())
+        .map(|f| f.map(|t| t.parse::<u32>().unwrap()).unwrap())
         .collect::<Vec<_>>()
 }
