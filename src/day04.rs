@@ -108,31 +108,22 @@ pub fn hgt_validate(inp: &str) -> bool {
 }
 
 pub fn hcl_validate(inp: &str) -> bool {
-    match HCL_REGEX.captures(inp) {
-        Some(s) => {
-            //println!("hcl {} {}", inp, s.len());
-            s.len() == 2
-        }
-        None => false,
-    }
+    HCL_REGEX
+        .captures(inp)
+        .map(|s| s.len() == 2)
+        .unwrap_or(false)
 }
 
 pub fn ecl_validate(inp: &str) -> bool {
-    match ECL_REGEX.captures(inp) {
-        Some(s) => {
-            // println!("ecl {} {}", inp, s.len());
-            s.len() == 2
-        }
-        None => false,
-    }
+    ECL_REGEX
+        .captures(inp)
+        .map(|s| s.len() == 2)
+        .unwrap_or(false)
 }
 
 pub fn pid_validate(inp: &str) -> bool {
-    match PID_REGEX.captures(inp) {
-        Some(s) => {
-            // println!("pid {} {}", inp, s.len());
-            s.len() == 2
-        }
-        None => false,
-    }
+    PID_REGEX
+        .captures(inp)
+        .map(|s| s.len() == 2)
+        .unwrap_or(false)
 }
