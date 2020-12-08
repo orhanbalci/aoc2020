@@ -1,6 +1,7 @@
 pub mod day01;
 pub mod day02;
 pub mod day03;
+pub mod day04;
 
 fn main() {
     let result_day01_part_i = day01::part_ii();
@@ -13,4 +14,8 @@ fn main() {
     println!("Day 03 Part I {}", result_day03_part_i);
     let result_day03_part_ii = day03::part_ii();
     println!("Day 03 Part II {}", result_day03_part_ii);
+    let result_day04_part_i = day04::part_i();
+    println!("Day 04 Part I {}", result_day04_part_i);
+    let result_day04_part_ii = day04::part_ii();
+    println!("Day 04 Part II {}", result_day04_part_ii);
 }
