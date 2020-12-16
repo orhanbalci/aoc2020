@@ -20,7 +20,9 @@ pub fn part_i() -> usize {
     let input = read_input();
     bags = input.iter().fold(bags, move |mut init, i| {
         let bb = parse_bags(i);
-        let (x, xs) = bb.split_first().unwrap();
+        let (x, xs) = bb
+            .split_first()
+            .expect("Can not get first element of parsed bag list");
         init.insert(x.color.clone(), xs.iter().cloned().collect());
         init
     });
@@ -66,7 +68,7 @@ pub fn search(a: &str, bags: &HashMap<String, Vec<Bag>>) -> bool {
 
 pub fn count(a: &str, bags: &HashMap<String, Vec<Bag>>) -> u32 {
     if bags.get(a).unwrap().is_empty() {
-        dbg!(a, 0);
+        //dbg!(a, 0);
         0
     } else {
         let res = bags
@@ -75,7 +77,7 @@ pub fn count(a: &str, bags: &HashMap<String, Vec<Bag>>) -> u32 {
             .iter()
             .map(|b| b.amount * (count(&b.color, bags) + 1))
             .fold(0, |init, f| init + f);
-        dbg!(a, res);
+        //dbg!(a, res);
         res
     }
 }
